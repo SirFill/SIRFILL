@@ -34,9 +34,9 @@ Spiegazione dettagliata di StremioX (addon di streaming) e StremioC (addon catal
 [Apri Guida →](https://github.com/DieGon7771/ItaliaInStreaming/blob/master/README_Stremio.md)
 
 ## 🔀 Crediti
-• **La maggior parte dei plugin** sono forkati da: [doGiorsHadEnough](https://github.com/doGior/doGiorsHadEnough) 
+• **La maggior parte dei plugin** sono stati forkati da: [doGiorsHadEnough](https://github.com/doGior/doGiorsHadEnough) 
 
-• **Stremio** forkato da: [PhisherRepo](https://github.com/phisher98/cloudstream-extensions-phisher) 
+• **Stremio (StremioX)** e **SyncStream (Ultima)** sono stati forkati da: [PhisherRepo](https://github.com/phisher98/cloudstream-extensions-phisher) 
 
 
 ## 📄 Licenza
