@@ -30,6 +30,7 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
     private val sm = UltimaStorageManager
     private val extensions = sm.fetchExtensions()
     private val res: Resources = plugin.resources ?: throw Exception("Unable to read resources")
+    private val packageName = "it.dogior.hadEnough"  // Aggiunto per sostituire BuildConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,31 +42,31 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
 
     // region - resource helpers
     private fun getLayout(name: String, inflater: LayoutInflater, container: ViewGroup?): View {
-        val id = res.getIdentifier(name, "layout", BuildConfig.LIBRARY_PACKAGE_NAME)
+        val id = res.getIdentifier(name, "layout", packageName)  // Corretto
         return inflater.inflate(res.getLayout(id), container, false)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun getDrawable(name: String): Drawable {
-        val id = res.getIdentifier(name, "drawable", BuildConfig.LIBRARY_PACKAGE_NAME)
+        val id = res.getIdentifier(name, "drawable", packageName)  // Corretto
         return res.getDrawable(id, null)
             ?: throw Exception("Unable to find drawable $name")
     }
 
     private fun getString(name: String): String {
-        val id = res.getIdentifier(name, "string", BuildConfig.LIBRARY_PACKAGE_NAME)
+        val id = res.getIdentifier(name, "string", packageName)  // Corretto
         return res.getString(id)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun <T : View> View.findView(name: String): T {
-        val id = res.getIdentifier(name, "id", BuildConfig.LIBRARY_PACKAGE_NAME)
+        val id = res.getIdentifier(name, "id", packageName)  // Corretto
         return findViewById(id)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun View.makeTvCompatible() {
-        val outlineId = res.getIdentifier("outline", "drawable", BuildConfig.LIBRARY_PACKAGE_NAME)
+        val outlineId = res.getIdentifier("outline", "drawable", packageName)  // Corretto
         background = res.getDrawable(outlineId, null)
     }
 
@@ -83,7 +84,8 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     sm.currentExtensions = extensions
-                    plugin.reload()
+                    // Invece di plugin.reload(), notifichiamo il cambiamento in altro modo
+                    sm.save()
                 }
 
                 showToast("Saved. Please restart the app to apply changes.")
@@ -105,8 +107,8 @@ class UltimaReorder(val plugin: UltimaPlugin) : BottomSheetDialogFragment() {
         noSectionWarning: TextView? = null,
         currentSections: List<UltimaUtils.SectionInfo>? = null,
         focusingSection: Int? = null,
-        focusOn: String? = null,
-    ) {
+        focusOn: String? = null
+    ) {  // Chiusa la parentesi qui
         sectionsListView.removeAllViews()
 
         val sections = currentSections ?: run {
