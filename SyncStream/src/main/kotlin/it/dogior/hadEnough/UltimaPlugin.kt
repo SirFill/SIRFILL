@@ -11,22 +11,16 @@ import com.lagradost.cloudstream3.plugins.PluginManager
 @CloudstreamPlugin
 class UltimaPlugin : Plugin() {
     var activity: AppCompatActivity? = null
+    
     override fun load(context: Context) {
         activity = context as AppCompatActivity
-        // All providers should be added in this manner
+        
+        // Registra solo l'API principale Ultima
         registerMainAPI(Ultima(this))
 
-        UltimaStorageManager.currentMetaProviders.forEach { metaProvider ->
-            when (metaProvider.first) {
-                "Simkl" -> if (metaProvider.second) registerMainAPI(Simkl(this))
-                "AniList" -> if (metaProvider.second) registerMainAPI(AniList(this))
-                "MyAnimeList" -> if (metaProvider.second) registerMainAPI(MyAnimeList(this))
-                "TMDB" -> if (metaProvider.second) registerMainAPI(Tmdb(this))
-                "Trakt" -> if (metaProvider.second) registerMainAPI(Trakt(this))
-                else -> {}
-            }
-        }
-
+        // NOTA: Ho rimosso completamente il blocco dei meta provider
+        // perché hai detto di aver eliminato quei file
+        
         openSettings = { ctx ->
             val act = ctx as? AppCompatActivity
             if (act != null && !act.isFinishing && !act.isDestroyed) {
