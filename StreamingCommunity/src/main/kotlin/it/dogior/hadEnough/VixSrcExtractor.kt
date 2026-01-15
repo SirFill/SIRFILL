@@ -1,5 +1,6 @@
 package it.dogior.hadEnough
 
+import android.util.Log
 import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.utils.ExtractorApi
@@ -14,6 +15,7 @@ class VixSrcExtractor : ExtractorApi() {
     override val mainUrl = "vixsrc.to"
     override val name = "VixCloud"
     override val requiresReferer = false
+    val TAG = "VixSrcExtractor"
 
     override suspend fun getUrl(
         url: String,
@@ -21,66 +23,41 @@ class VixSrcExtractor : ExtractorApi() {
         subtitleCallback: (SubtitleFile) -> Unit,
         callback: (ExtractorLink) -> Unit
     ) {
-        val safeReferer = referer ?: "https://vixsrc.to/"
-        val playlistUrl = getPlaylistLink(url, safeReferer)
-        
-        val headers = mapOf(
+        Log.d(TAG, "REFERER: $referer  URL: $url")
+        val playlistUrl = getPlaylistLink(url, referer)
+        Log.w(TAG, "FINAL URL: $playlistUrl")
+
+        // ⚡ HEADERS COMPLETI PER IL DOWNLOAD
+        val headers = mutableMapOf(
             "Accept" to "*/*",
             "Alt-Used" to url.toHttpUrl().host,
             "Connection" to "keep-alive",
             "Host" to url.toHttpUrl().host,
-            "Referer" to safeReferer,
+            "Referer" to referer ?: "https://vixsrc.to/",  // ← FIX: non usare !!
             "Sec-Fetch-Dest" to "iframe",
             "Sec-Fetch-Mode" to "navigate",
             "Sec-Fetch-Site" to "cross-site",
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/133.0",
+            "Origin" to "https://vixsrc.to"  // ← AGGIUNTO!
         )
 
-        // ⚡ USA LA STESSA FUNZIONE COMPATIBILE
-        val link = createCompatibleExtractorLink(
-            name = "VixSrc",
-            source = "VixSrc",
-            url = playlistUrl,
-            headers = headers,
-            referer = safeReferer
-        )
-        
-        callback.invoke(link)
-    }
-
-    // ⭐ STESSA FUNZIONE COMPATIBILE
-    private fun createCompatibleExtractorLink(
-        name: String,
-        source: String,
-        url: String,
-        headers: Map<String, String>,
-        referer: String
-    ): ExtractorLink {
-        return try {
-            ExtractorLink(
-                name = name,
-                source = source,
-                url = url,
-                type = ExtractorLinkType.M3U8,
-                quality = Qualities.P720.value,
-                headers = headers,
-                referer = referer
-            )
-        } catch (e: NoSuchMethodError) {
+        callback.invoke(
             newExtractorLink(
-                source = source,
-                name = name,
-                url = url,
-                type = ExtractorLinkType.VIDEO,
-                quality = Qualities.P720.value
+                source = "VixSrc",
+                name = "Streaming Community - VixSrc",
+                url = playlistUrl,
+                type = ExtractorLinkType.M3U8  // ← PROVA PRIMA M3U8
             ) {
                 this.headers = headers
-                this.referer = referer
+                this.referer = referer ?: ""  // ← FIX: non usare !!
+                this.quality = Qualities.P720.value  // ← AGGIUNTO!
             }
-        }
+        )
     }
 
-    private suspend fun getPlaylistLink(url: String, referer: String): String {
+    private suspend fun getPlaylistLink(url: String, referer: String?): String {
+        Log.d(TAG, "Item url: $url")
+
         val script = getScript(url, referer)
         val masterPlaylist = script.getJSONObject("masterPlaylist")
         val masterPlaylistParams = masterPlaylist.getJSONObject("params")
@@ -90,27 +67,29 @@ class VixSrcExtractor : ExtractorApi() {
 
         var masterPlaylistUrl: String
         val params = "token=${token}&expires=${expires}"
-        
         masterPlaylistUrl = if ("?b" in playlistUrl) {
             "${playlistUrl.replace("?b:1", "?b=1")}&$params"
         } else {
             "${playlistUrl}?$params"
         }
+        Log.d(TAG, "masterPlaylistUrl: $masterPlaylistUrl")
 
         if (script.getBoolean("canPlayFHD")) {
             masterPlaylistUrl += "&h=1"
         }
 
+        Log.d(TAG, "Master Playlist URL: $masterPlaylistUrl")
         return masterPlaylistUrl
     }
 
-    private suspend fun getScript(url: String, referer: String): JSONObject {
-        val headers = mapOf(
+    private suspend fun getScript(url: String, referer: String?): JSONObject {
+        Log.d(TAG, "Item url: $url")
+        val headers = mutableMapOf(
             "Accept" to "*/*",
             "Alt-Used" to url.toHttpUrl().host,
             "Connection" to "keep-alive",
             "Host" to url.toHttpUrl().host,
-            "Referer" to referer,
+            "Referer" to referer ?: "https://vixsrc.to/",  // ← FIX: non usare !!
             "Sec-Fetch-Dest" to "iframe",
             "Sec-Fetch-Mode" to "navigate",
             "Sec-Fetch-Site" to "cross-site",
@@ -119,9 +98,12 @@ class VixSrcExtractor : ExtractorApi() {
 
         val resp = app.get(url, headers = headers).document
         val scripts = resp.select("script")
-        val script = scripts.find { it.data().contains("masterPlaylist") }!!.data().replace("\n", "\t")
+        val script =
+            scripts.find { it.data().contains("masterPlaylist") }!!.data().replace("\n", "\t")
 
-        return JSONObject(getSanitisedScript(script))
+        val scriptJson = getSanitisedScript(script)
+        Log.d(TAG, "Script Json: $scriptJson")
+        return JSONObject(scriptJson)
     }
 
     private fun getSanitisedScript(script: String): String {
@@ -143,7 +125,10 @@ class VixSrcExtractor : ExtractorApi() {
 
             "\"$key\": $cleaned"
         }
-        
-        return "{\n${jsonObjects.joinToString(",\n")}\n}".replace("'", "\"")
+        val finalObject =
+            "{\n${jsonObjects.joinToString(",\n")}\n}"
+                .replace("'", "\"")
+
+        return finalObject
     }
 }
