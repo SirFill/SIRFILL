@@ -1,9 +1,7 @@
 package it.dogior.hadEnough
 
 import com.lagradost.api.Log
-import com.lagradost.cloudstream3.APIHolder.capitalize
 import com.lagradost.cloudstream3.Episode
-import com.lagradost.cloudstream3.SearchResponse
 import com.lagradost.cloudstream3.HomePageList
 import com.lagradost.cloudstream3.HomePageResponse
 import com.lagradost.cloudstream3.LoadResponse
@@ -15,16 +13,15 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.MainAPI
 import com.lagradost.cloudstream3.MainPageRequest
 import com.lagradost.cloudstream3.SearchResponseList
-import com.lagradost.cloudstream3.newSearchResponseList
 import com.lagradost.cloudstream3.SubtitleFile
 import com.lagradost.cloudstream3.TvType
 import com.lagradost.cloudstream3.app
-
 import com.lagradost.cloudstream3.mainPageOf
 import com.lagradost.cloudstream3.newEpisode
 import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.newMovieLoadResponse
 import com.lagradost.cloudstream3.newMovieSearchResponse
+import com.lagradost.cloudstream3.newSearchResponseList
 import com.lagradost.cloudstream3.newTvSeriesLoadResponse
 import com.lagradost.cloudstream3.newTvSeriesSearchResponse
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
@@ -32,12 +29,10 @@ import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
-
 class StreamingCommunity : MainAPI() {
     override var mainUrl = Companion.mainUrl
     override var name = Companion.name
-    override var supportedTypes =
-        setOf(TvType.Movie, TvType.TvSeries, TvType.Cartoon, TvType.Documentary)
+    override var supportedTypes = setOf(TvType.Movie, TvType.TvSeries, TvType.Cartoon, TvType.Documentary)
     override var lang = "it"
     override val hasMainPage = true
 
@@ -80,9 +75,7 @@ class StreamingCommunity : MainAPI() {
         val response = app.get("$mainUrl/archive")
         val cookies = response.cookies
         headers["Cookie"] = cookies.map { it.key + "=" + it.value }.joinToString(separator = "; ")
-//        Log.d("Inertia", response.headers.toString())
         val page = response.document
-//        Log.d("Inertia", page.toString())
         val inertiaPageObject = page.select("#app").attr("data-page")
         inertiaVersion = inertiaPageObject
             .substringAfter("\"version\":\"")
@@ -90,9 +83,9 @@ class StreamingCommunity : MainAPI() {
         headers["X-Inertia-Version"] = inertiaVersion
     }
 
-    private fun searchResponseBuilder(listJson: List<Title>): List<SearchResponse> {
+    private fun searchResponseBuilder(listJson: List<Title>): List<com.lagradost.cloudstream3.SearchResponse> {
         val domain = mainUrl.substringAfter("://").substringBeforeLast("/")
-        val list: List<SearchResponse> =
+        val list: List<com.lagradost.cloudstream3.SearchResponse> =
             listJson.filter { it.type == "movie" || it.type == "tv" }.map { title ->
                 val url = "$mainUrl/titles/${title.id}-${title.slug}"
 
@@ -109,7 +102,6 @@ class StreamingCommunity : MainAPI() {
         return list
     }
 
-    //Get the Homepage
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         var url = mainUrl.substringBeforeLast("/") + "/api" +
                 request.data.substringAfter(mainUrl)
@@ -117,18 +109,9 @@ class StreamingCommunity : MainAPI() {
 
         val section = request.data.substringAfterLast("/")
         when (section) {
-            "trending" -> {
-//                Log.d(TAG, "TRENDING")
+            "trending", "latest", "top10" -> {
+                // Mantieni URL come è
             }
-
-            "latest" -> {
-//                Log.d(TAG, "LATEST")
-            }
-
-            "top10" -> {
-//                Log.d(TAG, "TOP10")
-            }
-
             else -> {
                 val genere = url.substringAfterLast('=')
                 url = url.substringBeforeLast('?')
@@ -158,8 +141,7 @@ class StreamingCommunity : MainAPI() {
         )
     }
 
-
-    override suspend fun search(query: String): List<SearchResponse> {
+    override suspend fun search(query: String): List<com.lagradost.cloudstream3.SearchResponse> {
         val url = "$mainUrl/search"
         val params = mapOf("q" to query)
 
@@ -171,7 +153,6 @@ class StreamingCommunity : MainAPI() {
 
         return searchResponseBuilder(result.props.titles!!)
     }
-
 
     override suspend fun search(query: String, page: Int): SearchResponseList {
         val searchUrl = "${mainUrl.replace("/it", "")}/api/search"
@@ -197,7 +178,6 @@ class StreamingCommunity : MainAPI() {
         }
     }
 
-    // This function gets called when you enter the page/show
     override suspend fun load(url: String): LoadResponse {
         val actualUrl = getActualUrl(url)
         if (headers["Cookie"].isNullOrEmpty()) {
@@ -237,12 +217,9 @@ class StreamingCommunity : MainAPI() {
                 title.tmdbId?.let { this.addTMDbId(it.toString()) }
                 this.addActors(title.mainActors?.map { it.name })
                 this.addScore(title.score)
-                if (trailers != null) {
-                    if (trailers.isNotEmpty()) {
-                        addTrailer(trailers)
-                    }
+                if (trailers != null && trailers.isNotEmpty()) {
+                    addTrailer(trailers)
                 }
-
             }
             return tvShow
         } else {
@@ -267,15 +244,11 @@ class StreamingCommunity : MainAPI() {
                 this.recommendations = related?.titles?.let { searchResponseBuilder(it) }
                 this.addActors(title.mainActors?.map { it.name })
                 this.addScore(title.score)
-
                 title.imdbId?.let { this.addImdbId(it) }
                 title.tmdbId?.let { this.addTMDbId(it.toString()) }
-
                 title.runtime?.let { this.duration = it }
-                if (trailers != null) {
-                    if (trailers.isNotEmpty()) {
-                        addTrailer(trailers)
-                    }
+                if (trailers != null && trailers.isNotEmpty()) {
+                    addTrailer(trailers)
                 }
             }
             return movie
@@ -287,7 +260,6 @@ class StreamingCommunity : MainAPI() {
             val replacingValue =
                 if (url.contains("/it/")) mainUrl.toHttpUrl().host else mainUrl.toHttpUrl().host + "/it"
             val actualUrl = url.replace(url.toHttpUrl().host, replacingValue)
-
             Log.d("$TAG:UrlFix", "Old: $url\nNew: $actualUrl")
             actualUrl
         } else {
@@ -312,7 +284,6 @@ class StreamingCommunity : MainAPI() {
                 responseEpisodes.addAll(obj.props.loadedSeason?.episodes!!)
             }
             responseEpisodes.forEach { ep ->
-
                 val loadData = LoadData(
                     "$mainUrl/iframe/${title.id}?episode_id=${ep.id}&canPlayFHD=1",
                     type = "tv",
@@ -331,7 +302,6 @@ class StreamingCommunity : MainAPI() {
                 )
             }
         }
-
         return episodeList
     }
 
@@ -347,26 +317,39 @@ class StreamingCommunity : MainAPI() {
 
         val response = app.get(loadData.url).document
         val iframeSrc = response.select("iframe").attr("src")
+        
+        if (iframeSrc.isBlank()) {
+            Log.e(TAG, "iframe SRC vuoto!")
+            return false
+        }
+
+        Log.d(TAG, "iframe SRC: $iframeSrc")
+        Log.d(TAG, "Referer per VixCloud: $mainUrl/")
 
         VixCloudExtractor().getUrl(
             url = iframeSrc,
-            referer = mainUrl.substringBeforeLast("it"),
+            referer = "$mainUrl/",
             subtitleCallback = subtitleCallback,
             callback = callback
         )
 
-        val vixsrcUrl = if(loadData.type == "movie"){
-            "https://vixsrc.to/movie/${loadData.tmdbId}"
-        } else{
-            "https://vixsrc.to/tv/${loadData.tmdbId}/${loadData.seasonNumber}/${loadData.episodeNumber}"
+        if (loadData.tmdbId != null) {
+            Log.d(TAG, "TMDb ID: ${loadData.tmdbId}")
+            val vixsrcUrl = if (loadData.type == "movie") {
+                "https://vixsrc.to/movie/${loadData.tmdbId}"
+            } else {
+                "https://vixsrc.to/tv/${loadData.tmdbId}/${loadData.seasonNumber}/${loadData.episodeNumber}"
+            }
+
+            VixSrcExtractor().getUrl(
+                url = vixsrcUrl,
+                referer = "https://vixsrc.to/",
+                subtitleCallback = subtitleCallback,
+                callback = callback
+            )
+        } else {
+            Log.d(TAG, "TMDb ID null, salto VixSrc")
         }
-
-        VixSrcExtractor().getUrl(
-            url = vixsrcUrl,
-            referer = "https://vixsrc.to/",
-            subtitleCallback = subtitleCallback,
-            callback = callback
-        )
 
         return true
     }
