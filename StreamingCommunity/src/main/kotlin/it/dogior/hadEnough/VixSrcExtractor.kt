@@ -12,8 +12,8 @@ import org.json.JSONObject
 
 class VixSrcExtractor : ExtractorApi() {
     override val mainUrl = "vixsrc.to"
-    override val name = "VixSrc"
-    override val requiresReferer = true  // 🔧 CAMBIATO: richiede referer!
+    override val name = "VixCloud"
+    override val requiresReferer = false
     val TAG = "VixSrcExtractor"
     private var referer: String? = null
 
@@ -25,46 +25,27 @@ class VixSrcExtractor : ExtractorApi() {
     ) {
         this.referer = referer
         Log.d(TAG, "REFERER: $referer  URL: $url")
-        
-        // 🔧 CONTROLLO REFERER
-        if (referer == null) {
-            Log.e(TAG, "Referer è null! VixSrc richiede referer.")
-            return
-        }
-        
-        try {
-            val playlistUrl = getPlaylistLink(url, referer)
-            Log.w(TAG, "FINAL URL: $playlistUrl")
+        val playlistUrl = getPlaylistLink(url)
+        Log.w(TAG, "FINAL URL: $playlistUrl")
 
-            // 🔧 DETERMINA TIPO LINK
-            val linkType = if (playlistUrl.contains(".m3u8")) {
-                ExtractorLinkType.M3U8
-            } else {
-                ExtractorLinkType.VIDEO
+        callback.invoke(
+            newExtractorLink(
+                source = "VixSrc",
+                name = "Streaming Community - VixSrc",
+                url = playlistUrl,
+                type = ExtractorLinkType.M3U8
+            ) {
+                this.referer = referer!!
             }
+        )
 
-            callback.invoke(
-                newExtractorLink(
-                    source = "VixSrc",
-                    name = "Streaming Community - VixSrc",
-                    url = playlistUrl,
-                    type = linkType
-                ) {
-                    this.referer = referer
-                    // 🔧 IMPORTANTE per download M3U8
-                    this.isM3u8 = playlistUrl.contains(".m3u8")
-                }
-            )
-            
-        } catch (e: Exception) {
-            Log.e(TAG, "Errore VixSrcExtractor: ${e.message}", e)
-        }
+
     }
 
-    private suspend fun getPlaylistLink(url: String, referer: String): String {
+    private suspend fun getPlaylistLink(url: String): String {
         Log.d(TAG, "Item url: $url")
 
-        val script = getScript(url, referer)
+        val script = getScript(url)
         val masterPlaylist = script.getJSONObject("masterPlaylist")
         val masterPlaylistParams = masterPlaylist.getJSONObject("params")
         val token = masterPlaylistParams.getString("token")
@@ -88,15 +69,14 @@ class VixSrcExtractor : ExtractorApi() {
         return masterPlaylistUrl
     }
 
-    private suspend fun getScript(url: String, referer: String): JSONObject {
+    private suspend fun getScript(url: String): JSONObject {
         Log.d(TAG, "Item url: $url")
-        
         val headers = mutableMapOf(
             "Accept" to "*/*",
             "Alt-Used" to url.toHttpUrl().host,
             "Connection" to "keep-alive",
             "Host" to url.toHttpUrl().host,
-            "Referer" to referer,  // 🔧 ORA SICURO NON NULL
+            "Referer" to referer!!,
             "Sec-Fetch-Dest" to "iframe",
             "Sec-Fetch-Mode" to "navigate",
             "Sec-Fetch-Site" to "cross-site",
@@ -104,7 +84,9 @@ class VixSrcExtractor : ExtractorApi() {
         )
 
         val resp = app.get(url, headers = headers).document
+//        Log.d(TAG, resp.toString())
 
+//        Log.d(TAG, iframe.document.toString())
         val scripts = resp.select("script")
         val script =
             scripts.find { it.data().contains("masterPlaylist") }!!.data().replace("\n", "\t")
