@@ -27,14 +27,14 @@ class VixCloudExtractor : ExtractorApi() {
         val playlistUrl = getPlaylistLink(url, referer)
         Log.w(TAG, "FINAL URL: $playlistUrl")
 
-        // ⚡ HEADERS COMPLETI PER IL DOWNLOAD
-        val headers = mutableMapOf(
+        // ✅ HEADERS CORRETTI: Map<String, String>
+        val headers = mapOf(
             "Accept" to "*/*",
             "Connection" to "keep-alive",
             "Cache-Control" to "no-cache",
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
-            "Referer" to referer ?: "https://vixcloud.co/",  // ← IMPORTANTE!
-            "Origin" to "https://vixcloud.co"                 // ← IMPORTANTE!
+            "Referer" to (referer ?: "https://vixcloud.co/"),
+            "Origin" to "https://vixcloud.co"
         )
 
         callback.invoke(
@@ -42,11 +42,11 @@ class VixCloudExtractor : ExtractorApi() {
                 source = "VixCloud",
                 name = "Streaming Community - VixCloud",
                 url = playlistUrl,
-                type = ExtractorLinkType.M3U8  // ← PROVA PRIMA M3U8
+                type = ExtractorLinkType.M3U8  // ← PRIMA PROVA M3U8
             ) {
-                this.headers = headers
-                this.referer = referer ?: ""  // ← AGGIUNGI REFERER
-                this.quality = Qualities.P720.value  // ← AGGIUNGI QUALITY!
+                this.headers = headers  // ✅ Map<String, String>
+                this.referer = referer ?: ""
+                this.quality = Qualities.P720.value
             }
         )
     }
@@ -81,12 +81,13 @@ class VixCloudExtractor : ExtractorApi() {
     private suspend fun getScript(url: String, referer: String?): JSONObject {
         Log.d(TAG, "Item url: $url")
 
-        val headers = mutableMapOf(
+        // ✅ HEADERS CORRETTI: Map<String, String>
+        val headers = mapOf(
             "Accept" to "*/*",
             "Connection" to "keep-alive",
             "Cache-Control" to "no-cache",
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0",
-            "Referer" to referer ?: "https://vixcloud.co/"
+            "Referer" to (referer ?: "https://vixcloud.co/")
         )
         
         val iframe = app.get(url, headers = headers, interceptor = CloudflareKiller()).document
