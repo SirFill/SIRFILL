@@ -154,15 +154,34 @@ class Ultima(val plugin: UltimaPlugin) : MainAPI() {
             resumeData.url
         }
         
-        // Crea SearchResponse dal ResumeWatchingResult
-        return MovieSearchResponse(
-            name = displayName,
-            url = finalUrl,
-            apiName = resumeData.apiName,
-            type = TvType.Movie, // O TvType.TvSeries se hai modo di distinguere
-            posterUrl = resumeData.poster,
-            id = resumeData.id
-        )
+        // Determina il tipo di contenuto
+        val type = if (resumeData.url.contains("/tv/") || resumeData.name.contains("S")) {
+            TvType.TvSeries
+        } else {
+            TvType.Movie
+        }
+        
+        // Crea SearchResponse - versione compatibile
+        return when (type) {
+            TvType.TvSeries -> TvSeriesSearchResponse(
+                displayName,
+                finalUrl,
+                resumeData.apiName,
+                type
+            ).apply {
+                posterUrl = resumeData.poster ?: resumeData.posterUrl
+                this.id = resumeData.id
+            }
+            else -> MovieSearchResponse(
+                displayName,
+                finalUrl,
+                resumeData.apiName,
+                type
+            ).apply {
+                posterUrl = resumeData.poster ?: resumeData.posterUrl
+                this.id = resumeData.id
+            }
+        }
     }
     
     private fun addResumeTime(url: String, seconds: Int): String {
