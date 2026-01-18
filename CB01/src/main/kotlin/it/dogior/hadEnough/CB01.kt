@@ -326,9 +326,6 @@ class CB01 : MainAPI() {
         if (data == "null") return false
         var links = parseJson<List<String>>(data)
         links = links.filter { it.contains("uprot.net") || it.contains("stayonline") }
-        if (links.size > 2) {
-            links = links.subList(2, 4)
-        }
 
         links.mapNotNull {
             var link = if (it.contains("uprot")) {
@@ -357,7 +354,9 @@ class CB01 : MainAPI() {
                 if (link!!.contains("maxstream")) {
                     MaxStreamExtractor().getUrl(l, null, subtitleCallback, callback)
                 } else if (link!!.contains("mixdrop")) {
-                    val finalUrl = link!!.replace(".club", ".ps")
+                    val finalUrl = link!!.replace(".club", ".ag")
+                        .replace(".ps", ".ag")
+                        .replace(".co", ".ag")
                         .substringBeforeLast("/")
                         .substringBeforeLast("/")
                     MixDropExtractor().getUrl(finalUrl, "", subtitleCallback, callback)
