@@ -13,12 +13,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        ref: master  # ← CAMBIA DA builds A master
+        ref: master
     
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+    
+    - name: Install Python dependencies
+      run: pip install requests
     
     - name: Download plugins.json da builds
       run: |
@@ -28,7 +31,6 @@ jobs:
         echo "📄 plugins.json scaricato:"
         head -5 plugins.json
     
-    # Il resto RIMANE UGUALE
     - name: Leggi plugins.json
       run: python scripts/check_plugins.py
     
