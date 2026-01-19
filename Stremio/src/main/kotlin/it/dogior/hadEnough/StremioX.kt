@@ -41,6 +41,7 @@ import it.dogior.hadEnough.SubsExtractors.invokeWatchsomuch
 import java.util.concurrent.TimeUnit
 
 class StremioX(override var mainUrl: String, override var name: String) : TmdbProvider() {
+    override var lang = "it"
     override val hasMainPage = true
     override val hasQuickSearch = true
     override val supportedTypes = setOf(TvType.Others)
