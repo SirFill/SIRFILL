@@ -45,6 +45,7 @@ import java.util.Locale
 
 
 class StremioC(override var mainUrl: String, override var name: String) : MainAPI() {
+    override var lang = "it"
     override val supportedTypes = setOf(TvType.Others)
     override val hasMainPage = true
 
