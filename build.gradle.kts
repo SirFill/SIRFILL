@@ -13,7 +13,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.6.0")
         // Cloudstream gradle plugin which makes everything work and builds plugins
         classpath("com.github.recloudstream:gradle:-SNAPSHOT")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0") 
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0")
     }
 }
 
@@ -43,7 +43,7 @@ subprojects {
         namespace = "it.dogior.hadEnough"
         defaultConfig {
             minSdk = 21
-            compileSdkVersion(35)
+            compileSdk = 35 
             targetSdk = 35
         }
 
@@ -52,14 +52,20 @@ subprojects {
             targetCompatibility = JavaVersion.VERSION_1_8
         }
 
-        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-            kotlinOptions {
-                jvmTarget = "1.8" // Required
-                // Disables some unnecessary features
-                freeCompilerArgs = freeCompilerArgs +
-                        "-Xno-call-assertions" +
-                        "-Xno-param-assertions" +
-                        "-Xno-receiver-assertions"
+        // KOTLIN 2.3.0
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_1_8
+            targetCompatibility = JavaVersion.VERSION_1_8
+        }
+        
+        kotlin {
+            compilerOptions {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+                freeCompilerArgs.addAll(
+                    "-Xno-call-assertions",
+                    "-Xno-param-assertions", 
+                    "-Xno-receiver-assertions"
+                )
             }
         }
     }
@@ -74,7 +80,7 @@ subprojects {
         // these dependencies can include any of those which are added by the app,
         // but you dont need to include any of them if you dont need them
         // https://github.com/recloudstream/cloudstream/blob/master/app/build.gradle
-        implementation(kotlin("stdlib")) 
+        implementation(kotlin("stdlib"))
         implementation("com.github.Blatzar:NiceHttp:0.4.11") // http library
         implementation("org.jsoup:jsoup:1.18.1") // html parser
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
@@ -83,6 +89,6 @@ subprojects {
     }
 }
 
-task<Delete>("clean") {
-    delete(rootProject.buildDir)
+tasks.register("clean", Delete::class) {
+    delete(rootProject.layout.buildDirectory)
 }
