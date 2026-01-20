@@ -1,12 +1,12 @@
 // use an integer for version numbers
-version = 2
+version = 3
 
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "Documentari da arte.tv"
-    authors = listOf("doGior","DieGon")
+    description = "Concerti, documentari, ecc.. in arte.tv"
+    authors = listOf("doGior, DieGon")
 
     /**
     * Status int as the following:
@@ -19,8 +19,8 @@ cloudstream {
 
     tvTypes = listOf("Documentary")
 
-    requiresResources = false
-    language = "it"
+    requiresResources = true
+    language = "en"
 
     iconUrl = "https://static-cdn.arte.tv/replay/favicons/favicon-194x194.png"
 }
