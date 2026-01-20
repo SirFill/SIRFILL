@@ -13,7 +13,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.6.0")
         // Cloudstream gradle plugin which makes everything work and builds plugins
         classpath("com.github.recloudstream:gradle:-SNAPSHOT")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0")
     }
 }
 
@@ -74,7 +74,7 @@ subprojects {
         // these dependencies can include any of those which are added by the app,
         // but you dont need to include any of them if you dont need them
         // https://github.com/recloudstream/cloudstream/blob/master/app/build.gradle
-        implementation(kotlin("stdlib")) // adds standard kotlin features
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:2.3.0") // adds standard kotlin features
         implementation("com.github.Blatzar:NiceHttp:0.4.11") // http library
         implementation("org.jsoup:jsoup:1.18.1") // html parser
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
