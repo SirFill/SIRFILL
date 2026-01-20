@@ -17,10 +17,10 @@ class StremioXPlugin : Plugin() {
 
     override fun load(context: Context) {
         try {
-            registerMainAPI(StremioX("", "StremioX"))
+    //        registerMainAPI(StremioX("", "StremioX"))
         } catch (_: Throwable) {}
         try {
-            registerMainAPI(StremioC("", "StremioC"))
+    //        registerMainAPI(StremioC("", "StremioC"))
         } catch (_: Throwable) {}
         reload(context)
         val activity = context as? AppCompatActivity
