@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.konan.properties.Properties
 
 // use an integer for version numbers
-version = 4
+version = 5
 
 
 cloudstream {
@@ -17,7 +17,7 @@ cloudstream {
      * 2: Slow
      * 3: Beta only
      * */
-    status = 0
+    status = 2
 
     tvTypes = listOf("Movie", "Torrent")
 
