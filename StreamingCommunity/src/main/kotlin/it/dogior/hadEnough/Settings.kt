@@ -17,8 +17,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lagradost.cloudstream3.CommonActivity.showToast
-import com.lagradost.cloudstream3.utils.AppUtils.toJson
-import androidx.core.content.edit
 
 class Settings(
     private val plugin: StreamingCommunityPlugin,
@@ -41,7 +39,8 @@ class Settings(
     @SuppressLint("DiscouragedApi")
     @Suppress("SameParameterValue")
     private fun getDrawable(name: String): Drawable? {
-        val id = plugin.resources?.getIdentifier(name, "drawable", BuildConfig.LIBRARY_PACKAGE_NAME)
+        // SOSTITUITO: BuildConfig.LIBRARY_PACKAGE_NAME con nome package hardcoded
+        val id = plugin.resources?.getIdentifier(name, "drawable", "it.dogior.hadEnough")
         return id?.let { ResourcesCompat.getDrawable(plugin.resources ?: return null, it, null) }
     }
 
@@ -49,14 +48,16 @@ class Settings(
     @SuppressLint("DiscouragedApi")
     @Suppress("SameParameterValue")
     private fun getString(name: String): String? {
-        val id = plugin.resources?.getIdentifier(name, "string", BuildConfig.LIBRARY_PACKAGE_NAME)
+        // SOSTITUITO: BuildConfig.LIBRARY_PACKAGE_NAME con nome package hardcoded
+        val id = plugin.resources?.getIdentifier(name, "string", "it.dogior.hadEnough")
         return id?.let { plugin.resources?.getString(it) }
     }
 
     // Generic findView function to find views by name
     @SuppressLint("DiscouragedApi")
     private fun <T : View> View.findViewByName(name: String): T? {
-        val id = plugin.resources?.getIdentifier(name, "id", BuildConfig.LIBRARY_PACKAGE_NAME)
+        // SOSTITUITO: BuildConfig.LIBRARY_PACKAGE_NAME con nome package hardcoded
+        val id = plugin.resources?.getIdentifier(name, "id", "it.dogior.hadEnough")
         return findViewById(id ?: return null)
     }
 
@@ -67,10 +68,10 @@ class Settings(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val layoutId =
-            plugin.resources?.getIdentifier("settings", "layout", BuildConfig.LIBRARY_PACKAGE_NAME)
-        return layoutId?.let {
-            inflater.inflate(plugin.resources?.getLayout(it), container, false)
+        // SOSTITUITO: BuildConfig.LIBRARY_PACKAGE_NAME con nome package hardcoded
+        val layoutId = plugin.resources?.getIdentifier("settings", "layout", "it.dogior.hadEnough")
+        return layoutId?.takeIf { it != 0 }?.let {
+            inflater.inflate(it, container, false)
         }
     }
 
@@ -84,15 +85,19 @@ class Settings(
 
         // Initialize views
         val headerTw: TextView? = view.findViewByName("header_tw")
-        headerTw?.text = getString("header_tw")
+        headerTw?.text = getString("header_tw") ?: "Settings"
+        
         val labelTw: TextView? = view.findViewByName("label")
-        labelTw?.text = getString("label")
+        labelTw?.text = getString("label") ?: "Select Language"
 
         val langsDropdown: Spinner? = view.findViewByName("lang_spinner")
         val langs = arrayOf("it", "en")
-        val langsMap = langs.map { it to getString(it) }
+        val langDisplayNames = arrayOf("Italiano", "English")
+        
         langsDropdown?.adapter = ArrayAdapter(
-            requireContext(), android.R.layout.simple_spinner_dropdown_item, langsMap.map { it.second }
+            requireContext(), 
+            android.R.layout.simple_spinner_dropdown_item, 
+            langDisplayNames
         )
         langsDropdown?.setSelection(currentLangPosition)
 
@@ -110,16 +115,16 @@ class Settings(
             }
         }
 
-
         val saveBtn: ImageButton? = view.findViewByName("save_btn")
         saveBtn?.makeTvCompatible()
         saveBtn?.setImageDrawable(getDrawable("save_icon"))
 
         saveBtn?.setOnClickListener {
-            sharedPref?.edit {
-                this.clear()
-                this.putInt("langPosition", langs.indexOf(currentLang))
-                this.putString("lang", currentLang)
+            sharedPref?.edit()?.apply {
+                clear()
+                putInt("langPosition", langsDropdown?.selectedItemPosition ?: 0)
+                putString("lang", currentLang)
+                apply()
             }
             showToast("Saved. Restart the app to apply the settings")
             dismiss()
