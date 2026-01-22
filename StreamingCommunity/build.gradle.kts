@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 32
+version = 33
 
 
 cloudstream {
@@ -28,4 +28,14 @@ cloudstream {
     language = "it"
 
     iconUrl = "https://streamingunity.tv/apple-touch-icon.png?v=2"
+}
+android {
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation("com.google.android.material:material:1.13.0")
 }
