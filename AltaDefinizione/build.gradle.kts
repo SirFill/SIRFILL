@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 15
+version = 16
 
 
 cloudstream {
@@ -19,8 +19,19 @@ cloudstream {
 
     tvTypes = listOf("Movie", "TvSeries", "Documentary")
 
-    requiresResources = false
+    requiresResources = true
     language = "it"
 
     iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/AltaDefinizione/altadefinizione_icon.png"
+}
+
+android {
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation("com.google.android.material:material:1.12.0")
 }
