@@ -1,7 +1,6 @@
 package it.dogior.hadEnough
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
 import com.lagradost.cloudstream3.plugins.Plugin
 
@@ -17,8 +16,10 @@ class AltaDefinizionePlugin : Plugin() {
         }
     }
     
-    // Questo abilita l'icona ingranaggio
-    override fun getSettingsView(sharedPref: SharedPreferences?): Class<*>? {
-        return AltaDefinizioneSettings::class.java
+    override fun getSettings(sharedPref: android.content.SharedPreferences): com.lagradost.cloudstream3.plugins.PluginSettings? {
+        return com.lagradost.cloudstream3.plugins.PluginSettings(
+            view = AltaDefinizioneSettings::class.java,
+            sharedPref = sharedPref
+        )
     }
 }
