@@ -20,7 +20,7 @@ import com.lagradost.cloudstream3.CommonActivity.showToast
 import androidx.core.content.edit
 
 class AltaDefinizioneSettings(
-    private val plugin: AltaDefinizionePlugin,
+    private val plugin: AltaDefinizionePlugin,  // <-- LASCIA COSÌ
     private val sharedPref: SharedPreferences?,
 ) : BottomSheetDialogFragment() {
     private var currentVersion: String = sharedPref?.getString("site_version", "v1") ?: "v1"
@@ -64,7 +64,7 @@ class AltaDefinizioneSettings(
     ): View? {
         val layoutId = plugin.resources?.getIdentifier("settings", "layout", BuildConfig.LIBRARY_PACKAGE_NAME)
         return layoutId?.let {
-            inflater.inflate(plugin.resources?.getLayout(it) ?: return null, container, false)
+            inflater.inflate(plugin.resources?.getLayout(it), container, false)
         }
     }
 
@@ -76,26 +76,20 @@ class AltaDefinizioneSettings(
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inizializza le view
+        // Initialize views
         val headerTw: TextView? = view.findViewByName("header_tw")
-        headerTw?.text = getString("header_tw") ?: "AltaDefinizione"
-        
+        headerTw?.text = "Altadefinizione"  // <-- TESTO FISSO
         val labelTw: TextView? = view.findViewByName("label")
-        labelTw?.text = getString("label") ?: "Versione Sito"
+        labelTw?.text = "Versione Sito"  // <-- TESTO FISSO
 
-        // Configura lo spinner delle versioni
-        val versionDropdown: Spinner? = view.findViewByName("version_spinner")
-        
+        val versionDropdown: Spinner? = view.findViewByName("lang_spinner")  // <-- LASCIA lang_spinner
         val versions = arrayOf("v1", "v2")
-        val versionNames = arrayOf(
-            getString("v1") ?: "Versione Nuova",
-            getString("v2") ?: "Versione Vecchia"
-        )
+        val versionNames = arrayOf("🆕 Versione Nuova", "🗓️ Versione Vecchia")  // <-- NOMI VERSIONI
         
         versionDropdown?.adapter = ArrayAdapter(
             requireContext(), 
             android.R.layout.simple_spinner_dropdown_item, 
-            versionNames
+            versionNames  // <-- USA versionNames invece di langsMap
         )
         versionDropdown?.setSelection(currentVersionPosition)
 
@@ -114,17 +108,17 @@ class AltaDefinizioneSettings(
             }
         }
 
-        // Pulsante salva
         val saveBtn: ImageButton? = view.findViewByName("save_btn")
         saveBtn?.makeTvCompatible()
         saveBtn?.setImageDrawable(getDrawable("save_icon"))
 
         saveBtn?.setOnClickListener {
             sharedPref?.edit {
-                putString("site_version", currentVersion)
-                putInt("versionPosition", currentVersionPosition)
+                this.clear()
+                this.putInt("versionPosition", currentVersionPosition)  // <-- versionPosition invece di langPosition
+                this.putString("site_version", currentVersion)  // <-- site_version invece di lang
             }
-            showToast("Impostazioni salvate. Riavvia Cloudstream per applicare le modifiche")
+            showToast("Salvato. Riavvia l'app per applicare le impostazioni")
             dismiss()
         }
     }
