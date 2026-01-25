@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 15
+version = 16
 
 
 cloudstream {
@@ -25,5 +25,5 @@ cloudstream {
     language = "it"
     requiresResources = false
 
-    iconUrl = "https://www.animeunity.so/apple-touch-icon.png"
+    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/AnimeUnity/animeunity_icon.png"
 }
