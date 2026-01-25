@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 3
+version = 4
 
 
 cloudstream {
@@ -22,7 +22,7 @@ cloudstream {
     requiresResources = true
     language = "en"
 
-    iconUrl = "https://static-cdn.arte.tv/replay/favicons/favicon-194x194.png"
+    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/Arte/arte_icon.png"
 }
 
 android {
