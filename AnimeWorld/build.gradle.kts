@@ -6,7 +6,7 @@ cloudstream {
     language = "it"
     // All of these properties are optional, you can safely remove them
 
-    authors = listOf("doGior", "DieGon,SirFill")
+    authors = listOf("doGior", "DieGon", "SirFill")
     requiresResources = true
     description =
         "Anime da AnimeWorld"
