@@ -29,5 +29,5 @@ cloudstream {
         "Movie",
     )
     requiresResources = true
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/Stremio/stremio_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/Stremio/stremio_icon.png"
 }
