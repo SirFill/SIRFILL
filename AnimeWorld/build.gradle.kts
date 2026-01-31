@@ -6,7 +6,7 @@ cloudstream {
     language = "it"
     // All of these properties are optional, you can safely remove them
 
-    authors = listOf("doGior", "DieGon")
+    authors = listOf("doGior", "DieGon,SirFill")
     requiresResources = true
     description =
         "Anime da AnimeWorld"
@@ -25,7 +25,7 @@ cloudstream {
         "OVA",
     )
 
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/AnimeWorld/animeworld_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AnimeWorld/animeworld_icon.png"
 }
 
 android {
