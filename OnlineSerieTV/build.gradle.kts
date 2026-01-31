@@ -9,7 +9,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Movies and Shows from OnlineSerieTV"
-    authors = listOf("doGior")
+    authors = listOf("doGior","SirFill")
 
     /**
     * Status int as the following:
