@@ -11,5 +11,5 @@ cloudstream {
     tvTypes = listOf("All")
     requiresResources = true
     language = "it"
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/SyncStream/SyncStream_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/SyncStream/SyncStream_icon.png"
 }
