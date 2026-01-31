@@ -1,0 +1,275 @@
+[
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/AltaDefinizione.cs3",
+        "status": 1,
+        "version": 9,
+        "name": "AltaDefinizione",
+        "internalName": "AltaDefinizione",
+        "authors": [
+            "doGior"
+        ],
+        "description": "Movies and Tv Series from Altadefinizione",
+        "fileSize": 23526,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Documentary"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AltaDefinizione/altadefinizione_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/AnimeUnity.cs3",
+        "status": 1,
+        "version": 16,
+        "name": "AnimeUnity",
+        "internalName": "AnimeUnity",
+        "authors": [
+            "doGior",
+            "DieGon",
+            "SirFill"
+        ],
+        "description": "Anime da AnimeUnity",
+        "fileSize": 37884,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AnimeUnity/animeunity_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/AnimeWorld.cs3",
+        "status": 1,
+        "version": 17,
+        "name": "AnimeWorld",
+        "internalName": "AnimeWorld",
+        "authors": [
+            "doGior",
+            "DieGon",
+            "SirFill"
+        ],
+        "description": "Anime da AnimeWorld",
+        "fileSize": 41759,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AnimeWorld/animeworld_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/Arte.cs3",
+        "status": 1,
+        "version": 4,
+        "name": "Arte",
+        "internalName": "Arte",
+        "authors": [
+            "doGior, DieGon, SirFill"
+        ],
+        "description": "Concerti, documentari, ecc.. in arte.tv",
+        "fileSize": 33925,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "en",
+        "tvTypes": [
+            "Documentary"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/Arte/arte_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/CalcioStreaming.cs3",
+        "status": 1,
+        "version": 12,
+        "name": "CalcioStreaming",
+        "internalName": "CalcioStreaming",
+        "authors": [
+            "doGior",
+            "DieGon",
+            "SirFill "
+        ],
+        "description": "Live streams da CalcioStreaming",
+        "fileSize": 14402,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "Live"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/CalcioStreaming/calcio_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/CB01.cs3",
+        "status": 0,
+        "version": 24,
+        "name": "CB01",
+        "internalName": "CB01",
+        "authors": [
+            "doGior",
+            "DieGon",
+            "SirFill"
+        ],
+        "description": "Film e SerieTV da CB01",
+        "fileSize": 34634,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Cartoon"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/CB01/cb01_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/CorsaroNero.cs3",
+        "status": 2,
+        "version": 9,
+        "name": "CorsaroNero",
+        "internalName": "CorsaroNero",
+        "authors": [
+            "doGior",
+            "SirFil"
+        ],
+        "description": "Torrent da Il Corsaro Nero. If something doesn't work the torrent has probably not enough seeds",
+        "fileSize": 31091,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "Movie",
+            "Torrent"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/CorsaroNero/corsaronero_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/Huhu.cs3",
+        "status": 1,
+        "version": 4,
+        "name": "Huhu",
+        "internalName": "Huhu",
+        "authors": [
+            "DieGon",
+            "SirFill"
+        ],
+        "description": "Canali TV da Huhu",
+        "fileSize": 23997,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "tvTypes": [
+            "Live"
+        ],
+        "iconUrl": "https://huhu.to/favicon.ico",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/StreamingCommunity.cs3",
+        "status": 1,
+        "version": 39,
+        "name": "StreamingCommunity",
+        "internalName": "StreamingCommunity",
+        "authors": [
+            "doGior",
+            "DieGon",
+            "SirFill"
+        ],
+        "description": "Film e SerieTV da StreamingCommunity",
+        "fileSize": 58176,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "TvSeries",
+            "Movie",
+            "Documentary",
+            "Cartoon"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/StreamingCommunity/streamingunity_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/Stremio.cs3",
+        "status": 3,
+        "version": 10,
+        "name": "Stremio",
+        "internalName": "Stremio",
+        "authors": [
+            "Hexated, phisher98, DieGon"
+        ],
+        "description": "[!!!] Configurazione\n- StremioX: per utilizzare addons di streaming\n- StremioC: per utilizzare addons di catalogo",
+        "fileSize": 122329,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "TvSeries",
+            "Movie"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/Stremio/stremio_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/SyncStream.cs3",
+        "status": 3,
+        "version": 4,
+        "name": "SyncStream",
+        "internalName": "SyncStream",
+        "authors": [
+            "RowdyRushya, Phisher98, DieGon"
+        ],
+        "description": "Organizza homepage e sincronizza Continue Watching tra dispositivi",
+        "fileSize": 82838,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "All"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/master/SyncStream/SyncStream_icon.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/Torrentio.cs3",
+        "status": 1,
+        "version": 6,
+        "name": "Torrentio",
+        "internalName": "Torrentio",
+        "authors": [
+            "doGior"
+        ],
+        "description": "Torrent da Torrentio",
+        "fileSize": 41592,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "language": "it",
+        "tvTypes": [
+            "Movie",
+            "TvSeries",
+            "Torrent",
+            "Documentary"
+        ],
+        "iconUrl": "https://torrentio.strem.fun/images/logo_v1.png",
+        "apiVersion": 1
+    },
+    {
+        "url": "https://raw.githubusercontent.com/SirFill/SIRFILL/builds/TV.cs3",
+        "status": 1,
+        "version": 4,
+        "name": "TV",
+        "internalName": "TV",
+        "authors": [
+            "DieGon"
+        ],
+        "description": "TV live da TV github repository",
+        "fileSize": 28570,
+        "repositoryUrl": "https://github.com/SirFill/SIRFILL",
+        "tvTypes": [
+            "Live"
+        ],
+        "iconUrl": "https://raw.githubusercontent.com/SirFill/SIRFILL/refs/heads/master/TV/television.png",
+        "apiVersion": 1
+    }
+]
