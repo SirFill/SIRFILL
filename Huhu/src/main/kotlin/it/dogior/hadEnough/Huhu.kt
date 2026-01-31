@@ -43,7 +43,7 @@ class Huhu(domain: String, private val countries: Map<String, Boolean>, language
 
         @Suppress("ConstPropertyName")
         const val posterUrl =
-            "https://raw.githubusercontent.com/doGior/doGiorsHadEnough/master/Huhu/tv.png"
+            "https://raw.githubusercontent.com/SirFill/SIRFILL/master/Huhu/tv.png"
     }
 
     // Funzione di estensione su Channel per generare LiveSearchResponse
