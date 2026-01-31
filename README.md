@@ -16,12 +16,12 @@ Ciao! Sono SirFill e sto cercando di imparare a gestire una repository Git. Ho c
 **Stremio – Guida**
 Spiegazione dettagliata di StremioX (addon di streaming) e StremioC (addon catalogo).
 
-[Apri Guida →](https://github.com/DieGon7771/ItaliaInStreaming/blob/master/README_Stremio.md)
+[Apri Guida →](https://github.com/SirFill/SIRFILL/blob/master/README_Stremio.md)
 
 **SyncStream – Guida** 
 Spiegazione dettagliata di Cross Device Watch Sync (sincronizzazione dispositivi) e Sezioni Personalizzate (configurazione home).
 
-[Apri Guida →](https://github.com/DieGon7771/ItaliaInStreaming/blob/master/README_SyncStream.md)
+[Apri Guida →](https://github.com/SirFill/SIRFILL/blob/master/README_SyncStream.md)
 
 ## 🔀 Crediti
 • **La maggior parte dei plugin** sono stati forkati da: [doGiorsHadEnough](https://github.com/doGior/doGiorsHadEnough) 
@@ -56,5 +56,3 @@ Le estensioni qui presenti funzionano in maniera analoga a un normale browser we
 [Cs3-Repos](https://rentry.org/cs3-repos)
 
 ---
-
-**Grazie per aver scelto ItaliaInStreaming!**
