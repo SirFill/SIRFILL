@@ -7,7 +7,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
      description = "Live streams da CalcioStreaming"
-    authors = listOf("doGior","DieGon")
+    authors = listOf("doGior","DieGon","SirFill ")
 
     /**
      * Status int as the following:
@@ -21,5 +21,5 @@ cloudstream {
         "Live",
     )
 
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/CalcioStreaming/calcio_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/CalcioStreaming/calcio_icon.png"
 }
