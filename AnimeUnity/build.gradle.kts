@@ -6,7 +6,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Anime da AnimeUnity"
-    authors = listOf("doGior","DieGon,SirFill")
+    authors = listOf("doGior","DieGon","SirFill")
 
     /**
     * Status int as the following:
