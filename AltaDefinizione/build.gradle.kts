@@ -6,7 +6,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Film e SerieTV da Altadefinizione"
-    authors = listOf("doGior","DieGon")
+    authors = listOf("doGior","DieGon,"SirFill")
 
     /**
     * Status int as the following:
@@ -22,7 +22,7 @@ cloudstream {
     requiresResources = true
     language = "it"
 
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/AltaDefinizione/altadefinizione_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AltaDefinizione/altadefinizione_icon.png"
 }
 
 android {
