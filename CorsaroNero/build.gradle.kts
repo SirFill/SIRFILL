@@ -8,7 +8,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
     description =
         "Torrent da Il Corsaro Nero. If something doesn't work the torrent has probably not enough seeds"
-    authors = listOf("doGior")
+    authors = listOf("doGior","SirFil")
 
     /**
      * Status int as the following:
@@ -24,7 +24,7 @@ cloudstream {
     requiresResources = true
     language = "it"
 
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/CorsaroNero/corsaronero_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/CorsaroNero/corsaronero_icon.png"
 }
 
 android {
