@@ -6,7 +6,7 @@ cloudstream {
     // All of these properties are optional, you can safely remove them
 
     description = "Concerti, documentari, ecc.. in arte.tv"
-    authors = listOf("doGior, DieGon")
+    authors = listOf("doGior, DieGon, SirFill")
 
     /**
     * Status int as the following:
@@ -22,7 +22,7 @@ cloudstream {
     requiresResources = true
     language = "en"
 
-    iconUrl = "https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/Arte/arte_icon.png"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/Arte/arte_icon.png"
 }
 
 android {
