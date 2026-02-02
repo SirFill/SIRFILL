@@ -1,12 +1,12 @@
 // use an integer for version numbers
-version = 20
+version = 5
 
 
 cloudstream {
     // All of these properties are optional, you can safely remove them
 
-    description = "Film e SerieTV da Altadefinizione"
-    authors = listOf("doGior","DieGon","SirFill")
+    description = "Movies and Tv Series from Altadefinizione"
+    authors = listOf("doGior")
 
     /**
     * Status int as the following:
@@ -19,19 +19,8 @@ cloudstream {
 
     tvTypes = listOf("Movie", "TvSeries", "Documentary")
 
-    requiresResources = true
+    requiresResources = false
     language = "it"
 
-    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AltaDefinizione/altadefinizione_icon.png"
-}
-
-android {
-    buildFeatures {
-        buildConfig = true
-        viewBinding = true
-    }
-}
-
-dependencies {
-    implementation("com.google.android.material:material:1.12.0")
+    iconUrl = "https://altadefinizionegratis.fun/templates/Dark/img/favicon.ico"
 }
