@@ -22,5 +22,5 @@ cloudstream {
     requiresResources = false
     language = "it"
 
-    iconUrl = "https://altadefinizionegratis.fun/templates/Dark/img/favicon.ico"
+    iconUrl = "https://raw.githubusercontent.com/SirFill/SIRFILL/master/AltaDefinizione/altadefinizione_icon.png"
 }
