@@ -1,18 +1,6 @@
 # [SirFill](https://github.com/SirFill) Repo
 
-[Read in english](https://github.com/SirFill/SIRFILL/blob/master/README_en.md) <br><br>
 Ciao! Sono SirFill e sto cercando di imparare a gestire una repository Git. Ho copiato la repo del magnifico [doGior](https://github.com/doGior) e farò del mio meglio per mantenerla al meglio.
-
-## 📥 Installazione
-
-Clicca sull'immagine per installare la repo oppure vai in *Impostazioni* -> *Estensioni* -> *Aggiungi repository* e nel campo URL scrivi: `diegon7`
-
-
-<p align="center">
-  <a href="https://diegon7771.github.io/Cs-site?r=cloudstreamrepo://pastebin.com/raw/qndZtL6D" target="_blank">
-    <img src="https://raw.githubusercontent.com/DieGon7771/ItaliaInStreaming/master/install.png" alt="Install" width="170px"/>
-  </a>
-</p>
 
 ## ⚒️ Tecnologie Utilizzate
 
